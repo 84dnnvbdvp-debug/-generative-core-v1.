@@ -1,0 +1,9 @@
+{
+  "capital_reserve_usd": 14.0,
+  "available_escrow_usd": 9.0,
+  "locked_escrow_usd": 0.0,
+  "api_reserve_usd": 5.0,
+  "contractor_payout_accrued_usd": 6.0,
+  "processed_issues": [],
+  "active_locks": {}
+}
