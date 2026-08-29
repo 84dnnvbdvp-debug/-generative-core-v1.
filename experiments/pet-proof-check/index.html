@@ -3,179 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pet Proof Check — What should I verify next?</title>
-  <meta name="description" content="A no-upload decision aid for independently verifying an inbound claim that someone found your missing pet.">
+  <title>Pet Proof Check — Retired experiment</title>
+  <meta name="description" content="Retired Vire Public Lab experiment comparing an interactive lost-pet claim verifier with a plain competent checklist.">
   <style>
-    :root {
-      color-scheme: light dark;
-      --page: Canvas;
-      --text: CanvasText;
-      --muted: color-mix(in srgb, CanvasText 68%, Canvas 32%);
-      --panel: color-mix(in srgb, Canvas 94%, CanvasText 6%);
-      --line: color-mix(in srgb, CanvasText 20%, Canvas 80%);
-      --accent: LinkText;
-    }
+    :root { color-scheme: light dark; --line: color-mix(in srgb, CanvasText 20%, Canvas 80%); --panel: color-mix(in srgb, Canvas 94%, CanvasText 6%); }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--page);
-      color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; background: Canvas; color: CanvasText; }
     main { width: min(760px, calc(100% - 32px)); margin: 48px auto 72px; }
-    h1 { font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; margin: 0 0 16px; }
+    h1 { font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.03; letter-spacing: -0.04em; margin-bottom: 12px; }
     h2 { margin-top: 0; }
-    p { max-width: 68ch; }
-    .lede { font-size: 1.15rem; color: var(--muted); }
+    .status { font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
     .card { border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin: 24px 0; background: var(--panel); }
-    fieldset { border: 0; padding: 0; margin: 0 0 26px; }
-    legend { font-weight: 750; margin-bottom: 10px; }
-    label.choice { display: block; padding: 9px 0; cursor: pointer; }
-    input { margin-right: 9px; }
-    button {
-      border: 1px solid var(--text);
-      border-radius: 999px;
-      padding: 11px 18px;
-      font: inherit;
-      font-weight: 750;
-      background: var(--text);
-      color: var(--page);
-      cursor: pointer;
-    }
-    button.secondary { background: transparent; color: var(--text); margin-left: 8px; }
-    #result { scroll-margin-top: 24px; }
-    .status { font-size: .82rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-    .result-title { font-size: 1.5rem; margin: 4px 0 12px; }
-    ol, ul { padding-left: 1.25rem; }
-    li { margin: .55rem 0; }
-    .note { border-left: 4px solid var(--accent); padding-left: 14px; }
-    .small { font-size: .92rem; color: var(--muted); }
-    a { color: var(--accent); }
-    footer { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 40px; }
-    [hidden] { display: none !important; }
+    li { margin: .65rem 0; }
+    code { overflow-wrap: anywhere; }
+    a { color: LinkText; }
+    .small { opacity: .75; font-size: .92rem; }
   </style>
 </head>
 <body>
 <main>
+  <div class="status">Retired experiment</div>
   <h1>Pet Proof Check</h1>
-  <p class="lede">Someone says they found your missing pet. This page will not decide whether they are a scammer. It helps choose the next <strong>independent verification step</strong> before money, codes, personal information, travel, or trust changes hands.</p>
-
-  <div class="card">
-    <form id="check-form">
-      <fieldset>
-        <legend>1. Who do they claim has your pet?</legend>
-        <label class="choice"><input type="radio" name="claimant" value="institution" required> A vet, shelter, animal control, police, or another named institution</label>
-        <label class="choice"><input type="radio" name="claimant" value="individual"> An individual finder</label>
-        <label class="choice"><input type="radio" name="claimant" value="unknown"> I am not sure / the story is unclear</label>
-      </fieldset>
-
-      <fieldset>
-        <legend>2. Is any of this happening before independent verification?</legend>
-        <label class="choice"><input type="checkbox" name="signals" value="code"> They want a one-time verification code sent to my phone or account</label>
-        <label class="choice"><input type="checkbox" name="signals" value="money"> They want money, a deposit, a gift card, crypto, wire transfer, or payment through a link they supplied</label>
-        <label class="choice"><input type="checkbox" name="signals" value="threat"> They are threatening me, demanding ransom, or making an in-person handoff feel unsafe</label>
-        <label class="choice"><input type="checkbox" name="signals" value="image"> Their main proof is a photo or video</label>
-        <label class="choice"><input type="checkbox" name="signals" value="none"> None of these / not sure</label>
-      </fieldset>
-
-      <button type="submit">Show my next verification step</button>
-      <button type="reset" class="secondary">Reset</button>
-    </form>
-  </div>
-
-  <section id="result" class="card" hidden aria-live="polite"></section>
+  <p>This Vire Public Lab experiment tested whether a small interactive decision tool added useful protection when someone claims to have found a missing pet. The first prototype was published at commit <code>b7d9eca1df92e7462e3a632818426c197c6c8177</code>.</p>
 
   <section class="card">
-    <h2>Two rules this tool intentionally does <em>not</em> use</h2>
-    <p><strong>It does not try to detect AI from a picture.</strong> Photos, videos, reverse-image searches, metadata, or provenance signals can contribute evidence, but none of them proves that the sender physically has your pet.</p>
-    <p><strong>It does not say “never pay anything before the pet is released.”</strong> Real public shelters may charge legitimate reclaim, boarding, vaccination, or treatment fees before release. The safer boundary is: verify the institution independently, verify that it actually has your pet, then use its official payment/release path.</p>
+    <h2>Result: the cheaper baseline tied it</h2>
+    <p>A plain competent checklist reproduced every decision-relevant result in the tested cases. The interactive version filtered which instructions appeared, but there is not yet evidence that the branching improves correctness, safety, comprehension, or reunion outcomes enough to justify the extra code and maintenance.</p>
+    <p>Rather than expand the prototype to defend the original idea, the active product experiment is retired. Git history preserves the interactive version and this page preserves the correction.</p>
   </section>
 
-  <footer>
-    <h2>Sources and boundaries</h2>
-    <p>This prototype is a bounded Vire Public Lab experiment. It stores nothing, sends nothing, and makes no automated fraud finding. Public visibility is not validation or endorsement.</p>
-    <ul>
-      <li><a href="https://consumer.ftc.gov/consumer-alerts/2026/06/animal-lovers-learn-spot-and-avoid-breed-pet-scams">FTC — Animal lovers: learn to spot and avoid this breed of pet scams</a></li>
-      <li><a href="https://petfbi.org/lost-pet-scams/">Pet FBI — Lost Pet Scams</a></li>
-      <li><a href="https://support.lost.petcolove.org/hc/en-us/articles/40180770842259-I-was-told-to-text-a-number-for-a-pet-tracking-service-is-this-a-SCAM">Petco Love Lost — scam guidance</a></li>
-      <li><a href="https://www.johnstonnc.gov/animalsvcs/content.cfm?pageid=faqs">Johnston County Animal Services — reclaim fee example</a></li>
-      <li><a href="https://www.pittcountync.gov/757/Lost-Found-Animals">Pitt County Animal Services — reclaim/boarding fee example</a></li>
-    </ul>
-    <p class="small">If you believe a person actually stole your pet, is demanding ransom, is threatening you, or a handoff would be unsafe, preserve the messages and contact local law enforcement rather than trying to settle the interaction through this page. For immediate danger, use your local emergency service.</p>
-  </footer>
+  <section class="card">
+    <h2>The surviving checklist</h2>
+    <ol>
+      <li><strong>Do not share a one-time verification code or pay an unverified claimant.</strong> Urgency, caller ID, a payment request, or a convincing image is not proof that someone has your pet.</li>
+      <li><strong>If they claim to be a vet, shelter, animal control agency, police department, or other institution:</strong> find that institution's official contact information independently and ask whether your pet is physically in its care. If confirmed, use the institution's official release and payment path. Real shelters may have legitimate reclaim, boarding, vaccination, or treatment fees.</li>
+      <li><strong>If they are an individual finder:</strong> ask for a pet detail that was not in your public post. Prefer independent possession verification through a vet/shelter microchip scan that you confirm with the facility, or a safe public handoff at a vet, shelter, or police station. A low-tech finder or unmicrochipped pet can still use this path.</li>
+      <li><strong>Treat photos and videos as supporting evidence only.</strong> They can be real, stolen, altered, or generated; none of those possibilities is settled merely by looking at the file.</li>
+      <li><strong>If there are threats, ransom demands, suspected theft, or an unsafe handoff:</strong> preserve the messages and contact local law enforcement and the platform where the contact occurred. Real possession does not make the interaction safe or legitimate.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>What was tested</h2>
+    <p>The hostile comparison included a spoofed institution asking for payment, a legitimate shelter with pre-release fees, an individual finder, a verification-code request, image/video-only “proof,” a low-tech finder, an unmicrochipped pet, an emergency-vet story, an inconsistent story, and threat/ransom conditions. The checklist and interactive version reached the same consequential next actions in those cases.</p>
+    <p>The interactive prototype also mostly represented pre-verification <em>unresolved</em> or <em>unsafe</em> states rather than a full verified/disproven lifecycle. That limitation was not repaired because the baseline comparison did not justify adding more machinery.</p>
+  </section>
+
+  <section class="card">
+    <h2>Reopen only with new evidence</h2>
+    <p>This experiment can be reconsidered if actual users show that conditional interaction materially improves decisions over the checklist, if a new scam mechanism cannot be routed cleanly by the short baseline, or if a real case exposes harm or ambiguity the baseline misses. Public visibility does not mean anyone has validated or requested this product.</p>
+  </section>
+
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://consumer.ftc.gov/consumer-alerts/2026/06/animal-lovers-learn-spot-and-avoid-breed-pet-scams">FTC — Animal lovers: learn to spot and avoid this breed of pet scams</a></li>
+    <li><a href="https://petfbi.org/lost-pet-scams/">Pet FBI — Lost Pet Scams</a></li>
+    <li><a href="https://support.lost.petcolove.org/hc/en-us/articles/40180770842259-I-was-told-to-text-a-number-for-a-pet-tracking-service-is-this-a-SCAM">Petco Love Lost — scam guidance</a></li>
+    <li><a href="https://www.johnstonnc.gov/animalsvcs/content.cfm?pageid=faqs">Johnston County Animal Services — reclaim fee example</a></li>
+    <li><a href="https://www.pittcountync.gov/757/Lost-Found-Animals">Pitt County Animal Services — reclaim/boarding fee example</a></li>
+  </ul>
+  <p class="small">Vire Public Lab records are experiments and corrections, not professional endorsements or guarantees.</p>
 </main>
-<script>
-(() => {
-  const form = document.getElementById('check-form');
-  const result = document.getElementById('result');
-
-  function esc(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  form.addEventListener('reset', () => {
-    result.hidden = true;
-    result.innerHTML = '';
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const claimant = data.get('claimant');
-    const signals = new Set(data.getAll('signals'));
-    const steps = [];
-    let status = 'Unresolved — verify more';
-    let title = 'Do not decide from the message alone.';
-
-    if (signals.has('code')) {
-      steps.push('<strong>Do not share the one-time code.</strong> A finder does not need a login or account-recovery code to prove they have your pet.');
-    }
-
-    if (signals.has('threat')) {
-      status = 'Unsafe / coercive';
-      title = 'Preserve the evidence and move the interaction to a safer authority.';
-      steps.push('Save the messages, account names, phone numbers, payment requests, and any claimed location.');
-      steps.push('Do not meet alone or let a ransom demand substitute for a safe handoff. Contact local law enforcement and report the account to the platform where the contact occurred.');
-    }
-
-    if (claimant === 'institution') {
-      steps.push('<strong>Find the institution yourself.</strong> Search for the vet, shelter, animal-control agency, or police department using a source independent of the message. Do not authenticate it from caller ID, a supplied phone number, QR code, or payment link.');
-      steps.push('<strong>Contact that official channel and ask whether your pet is physically in its care.</strong> Use your pet’s identifying details, intake/case information, or microchip information as appropriate.');
-      steps.push('If the institution independently confirms possession, follow its official release and payment process. Legitimate reclaim, boarding, vaccination, or treatment fees may exist. If it cannot confirm possession, do not send the claimant money.');
-    } else if (claimant === 'individual') {
-      steps.push('Ask for a detail about the pet that was <strong>not visible in your public post</strong>. Do not publish the answer in advance.');
-      steps.push('Prefer independent possession proof: ask the finder to take the pet to a vet or shelter for a microchip scan, then contact that facility independently; or arrange a safe public handoff at a vet, shelter, or police station.');
-      steps.push('A genuine finder may be low-tech and your pet may be unmicrochipped. A smartphone photo is not mandatory: non-public identifying details plus a safe physical or institutional verification path can still work.');
-    } else {
-      steps.push('Ask one clarifying question first: <strong>Who physically has the pet, and where?</strong>');
-      steps.push('Until you can independently verify that answer, do not send money, relay one-time codes, or follow payment links supplied by the claimant.');
-      steps.push('Once the claimant identifies a real institution, contact it independently. If it is an individual, use non-public pet details plus a vet/shelter scan or safe public handoff.');
-    }
-
-    if (signals.has('money') && claimant !== 'institution') {
-      steps.push('<strong>Do not pay the unverified claimant.</strong> A payment demand is not proof of possession. Verify the pet and the person/institution through an independent path first.');
-    } else if (signals.has('money') && claimant === 'institution') {
-      steps.push('Treat the payment request as unresolved until the separately sourced official institution confirms both the case and possession. Then use the official payment channel, not a link from the original message.');
-    }
-
-    if (signals.has('image')) {
-      steps.push('Treat the photo or video as <strong>supporting evidence only</strong>. It may be real, stolen, altered, or generated. Do not let the image replace independent possession verification.');
-    }
-
-    if (!signals.has('threat')) {
-      steps.push('If the claimant cooperates with independent verification, keep going. If they refuse every independent route, add pressure, or change the story, keep the claim unresolved and report suspicious activity rather than escalating trust.');
-    }
-
-    const safeStatus = esc(status);
-    const safeTitle = esc(title);
-    result.innerHTML = `<div class="status">${safeStatus}</div><h2 class="result-title">${safeTitle}</h2><ol>${steps.map(step => `<li>${step}</li>`).join('')}</ol><p class="note"><strong>Success here is not “the tool says safe.”</strong> Success is reaching evidence you can verify independently, or recognizing that the interaction should stop or move to a safer authority.</p>`;
-    result.hidden = false;
-    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-})();
-</script>
 </body>
 </html>
