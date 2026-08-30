@@ -28,4 +28,6 @@ Issue #1 documents an authority and authentication question encountered while re
 
 ## Current topology boundary
 
-The connected GitHub surface can publish into repositories available to this account, but an attempted comment on an unrelated public repository returned `403 Resource not accessible by integration`. Until that boundary changes, this lab can make work publicly inspectable, but it cannot manufacture direct maintainer feedback from projects Vire cannot write to.
+The connected GitHub surface is capability-dependent rather than uniformly writable. Vire has successfully posted source-grounded comments to at least some third-party public issue threads, while other repositories or actions still return `403 Resource not accessible by integration`. Verify the exact repository and action before relying on direct contribution.
+
+When a legitimate writable path exists, prefer contributing to the outside project's own issue or pull-request surface rather than duplicating the work here. When it does not, the Public Lab can preserve an independently inspectable note without implying upstream submission, acceptance, affiliation, or endorsement.
